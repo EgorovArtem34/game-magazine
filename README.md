@@ -1,0 +1,2 @@
+# game-magazine
+empty
