@@ -1,7 +1,11 @@
+import { Provider } from 'react-redux';
 import App from './App';
+import store from './slices/index.js';
 
 const init = () => (
-  <App />
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 export default init;
