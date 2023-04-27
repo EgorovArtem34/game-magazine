@@ -1,42 +1,44 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import routes from '../routes';
+import { BeatLoader } from 'react-spinners';
+import { selectors, fetchGames } from '../slices/gamesSlice.js';
+
+const EmptyGameList = () => (
+  <div className="empty flex-container">
+    No games are currently available. Please try again later
+  </div>
+);
+
+const Loader = () => (
+  <div className="loading flex-container">
+    <span>Loading...</span>
+    <BeatLoader color="#123abc" />
+  </div>
+);
 
 const GameLists = () => {
-  const [gameList, setGameList] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
-
-  const fetchData = useCallback(async () => {
-    const sizePage = 12;
-    const { data: { results } } = await axios.get(routes.allGame(sizePage, page));
-    if (results.length > 0) {
-      if (!hasMore) {
-        setHasMore(true);
-      }
-      setGameList([...gameList, ...results]);
-      setPage(page + 1);
-    } else {
-      setHasMore(false);
-    }
-  }, [gameList, hasMore, page]);
-
+  const dispatch = useDispatch();
+  const games = useSelector(selectors.selectAll);
+  const { hasMore, isLoading } = useSelector((state) => state.gamesSlice);
   useEffect(() => {
-    if (gameList.length === 0) {
-      fetchData();
+    if (games.length === 0 && hasMore) {
+      dispatch(fetchGames());
     }
-  }, [fetchData, gameList.length]);
+  }, [dispatch, games, hasMore]);
+  if (games.length === 0 && !isLoading) {
+    return <EmptyGameList />;
+  }
 
   return (
     <InfiniteScroll
-      dataLength={gameList.length}
-      next={fetchData}
+      dataLength={games.length}
+      next={() => dispatch(fetchGames())}
       hasMore={hasMore}
-      loader={<h4>Loading...</h4>}
+      loader={Loader()}
     >
       <div className="cards">
-        {gameList.map((game) => {
+        {games.map((game) => {
           const {
             background_image: backgroundImage,
             id, name, rating, released,
