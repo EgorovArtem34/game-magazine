@@ -1,19 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { BeatLoader } from 'react-spinners';
+import { Link } from 'react-router-dom';
+import Loader from './Loader.jsx';
 import { selectors, fetchGames } from '../slices/gamesSlice.js';
 
 const EmptyGameList = () => (
   <div className="empty flex-container">
     No games are currently available. Please try again later
-  </div>
-);
-
-const Loader = () => (
-  <div className="loading flex-container">
-    <span>Loading...</span>
-    <BeatLoader color="#123abc" />
   </div>
 );
 
@@ -41,12 +35,12 @@ const GameLists = () => {
         {games.map((game) => {
           const {
             background_image: backgroundImage,
-            id, name, rating, released,
+            id, name, rating, released, slug,
           } = game;
           return (
-            <div className="card" key={id}>
+            <Link to={`/game/${slug}`} key={id} className="card">
               <div
-                className="card-img"
+                className="bg-img"
                 style={{ backgroundImage: `url(${backgroundImage})` }}
               />
               <div className="card-info">
@@ -60,7 +54,7 @@ const GameLists = () => {
                   {released}
                 </span>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
