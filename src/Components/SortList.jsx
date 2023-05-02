@@ -6,7 +6,11 @@ import { AiFillStar, AiFillFire } from 'react-icons/ai';
 import { TbPlayerTrackNextFilled } from 'react-icons/tb';
 import { BsNintendoSwitch } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
+// import {
+//   Navigate,
+// } from 'react-router-dom';
 import { actions, fetchGames } from '../slices/gamesSlice.js';
+// import routes from '../utils/routes.js';
 
 const SortList = () => {
   const dispatch = useDispatch();
@@ -14,6 +18,8 @@ const SortList = () => {
     dispatch(actions.setFilteredType(type));
     dispatch(actions.setPage(1));
     dispatch(fetchGames());
+    window.location.href = `/sorted/${type}`;
+    // return <Navigate>
   };
 
   return (
@@ -22,12 +28,14 @@ const SortList = () => {
         <span className="sort-header">Top</span>
         <ul>
           <li>
-            <button type="button" onClick={() => handleClick('best')}>
+            {/* <Link to="/sorted/bestGame"> */}
+            <button type="submit" onClick={() => handleClick('best')}>
               <div className="btn-img-wrap">
                 <FaTrophy className="btn-img" />
               </div>
               <span className="link-text">Best games</span>
             </button>
+            {/* </Link> */}
           </li>
           <li>
             <button type="button" onClick={() => handleClick('worst')}>
