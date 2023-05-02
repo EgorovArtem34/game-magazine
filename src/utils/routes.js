@@ -13,7 +13,8 @@ const weekAgoRange = `&dates=${dateWeekAgo},${currentDateString}`;
 const nextMonthRange = `&dates=${currentDateString},${dataNextMonth}`;
 const routes = {
   defaultPath: () => '/',
-  allTimeTop: () => '/all-time-top',
+  sorted: () => '/sorted/:type',
+  game: () => '/game/:slug',
   allGame: (sizePage, page) => [api, `games?key=${apiKey}&page=${page}&page_size=${sizePage}`].join('/'),
   bestGame: (sizePage, page) => [api, `games?key=${apiKey}${topRate}&page=${page}&page_size=${sizePage}`].join('/'),
   worstGame: (sizePage, page) => [api, `games?key=${apiKey}${lowRate}&page=${page}&page_size=${sizePage}`].join('/'),
@@ -24,6 +25,9 @@ const routes = {
   nintendoSwitch: (sizePage, page) => [api, `games?key=${apiKey}&platforms=7&ordering=-added&page=${page}&page_size=${sizePage}`].join('/'),
   playStation5: (sizePage, page) => [api, `games?key=${apiKey}&platforms=187&ordering=-added&page=${page}&page_size=${sizePage}`].join('/'),
   xboxOne: (sizePage, page) => [api, `games?key=${apiKey}&platforms=1&ordering=-added&page=${page}&page_size=${sizePage}`].join('/'),
+  searchGame: (sizePage, gameName) => [api, `games?key=${apiKey}&search=${gameName}&page_size=${sizePage}`].join('/'),
+  getGameDetail: (id) => [api, 'games', `${id}?key=${apiKey}`].join('/'),
+  getScreenshotsGame: (id) => [api, 'games', `${id}`, `screenshots?key=${apiKey}`].join('/'),
 };
 
 export default routes;
