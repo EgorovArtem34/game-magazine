@@ -23,7 +23,7 @@ const GameLists = () => {
   if (games.length === 0 && !isLoading) {
     return <EmptyGameList />;
   }
-
+  console.log('GameLIST', games);
   return (
     <InfiniteScroll
       dataLength={games.length}
