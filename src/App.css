@@ -48,6 +48,7 @@ input {
   color: black;
 }
 
+
 input:hover {
   background-color: white;
 }
@@ -161,6 +162,7 @@ button {
   color: white;
 }
 
+a.active .btn-img-wrap,
 button:hover .btn-img-wrap {
   background-color: white;
   color: var(--basic-dark)
