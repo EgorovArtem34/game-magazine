@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/game-magazine/static/css/main.d7d192d1.css",
+    "main.js": "/game-magazine/static/js/main.dd60fe8f.js",
+    "index.html": "/game-magazine/index.html",
+    "main.d7d192d1.css.map": "/game-magazine/static/css/main.d7d192d1.css.map",
+    "main.dd60fe8f.js.map": "/game-magazine/static/js/main.dd60fe8f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7d192d1.css",
+    "static/js/main.dd60fe8f.js"
+  ]
+}
