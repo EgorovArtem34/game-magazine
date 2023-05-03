@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import Loader from './Loader';
 import { actions } from '../slices/gamesSlice';
 
-const DropDownSearch = () => {
+const DropDownSearch = ({ onInputChange }) => {
   const { removeSearchedGames } = actions;
   const dispatch = useDispatch();
   const {
-    // isLoading,
     searchGames: { isLoadingSearch, games },
   } = useSelector(({ gamesSlice }) => gamesSlice);
+
   if (!games) {
     return '';
   }
@@ -28,6 +28,12 @@ const DropDownSearch = () => {
       </div>
     );
   }
+
+  const handleClick = () => {
+    onInputChange('');
+    dispatch(removeSearchedGames());
+  };
+
   return (
     <div className="dropdown-content">
       <span>Games</span>
@@ -39,7 +45,7 @@ const DropDownSearch = () => {
               id, name, slug,
             } = game;
             return (
-              <Link to={`/game/${slug}`} key={id} onClick={() => dispatch(removeSearchedGames())}>
+              <Link to={`/game/${slug}`} key={id} onClick={handleClick}>
                 <li key={id} className="dropdown-li">
                   <div
                     className="bg-img dropdown-img"

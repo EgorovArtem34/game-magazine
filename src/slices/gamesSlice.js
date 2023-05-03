@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import getRoute from '../utils/getRoute.js';
@@ -15,7 +14,7 @@ const initialState = gamesAdapter.getInitialState({
     games: null,
   },
   gameDetails: {
-    isLoading: false,
+    // isLoading: false,
     data: null,
   },
 });
@@ -39,7 +38,6 @@ export const fetchGames = createAsyncThunk(
     const { page, sizePage, filteredType } = thunkAPI.getState().gamesSlice;
     const route = getRoute(filteredType, sizePage, page);
     const { data: { results } } = await axios.get(route);
-    console.log(filteredType);
     return results;
   },
 );
@@ -133,15 +131,15 @@ const gamesSlice = createSlice({
         console.log(action.error);
       })
 
-      .addCase(fetchGameDetail.pending, (state) => {
-        state.gameDetails.isLoading = true;
-      })
+      // .addCase(fetchGameDetail.pending, (state) => {
+      //   state.gameDetails.isLoading = true;
+      // })
       .addCase(fetchGameDetail.fulfilled, (state, { payload }) => {
-        state.gameDetails.isLoading = false;
+        // state.gameDetails.isLoading = false;
         state.gameDetails.data = payload;
       })
       .addCase(fetchGameDetail.rejected, (state, action) => {
-        state.gameDetails.isLoading = false;
+        // state.gameDetails.isLoading = false;
         console.log(action.error);
       });
   },

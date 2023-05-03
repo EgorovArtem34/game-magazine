@@ -2,7 +2,6 @@ import React, {
   useState, useRef, useEffect, useCallback,
 } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { searchGames, actions } from '../slices/gamesSlice';
 import DropDownSearch from './DropDownSearch';
@@ -41,9 +40,7 @@ const Header = () => {
 
   return (
     <header className="header container">
-      <Link to={routes.defaultPath()}>
-        <span className="link header-link">GAME</span>
-      </Link>
+      <a href={routes.defaultPath()} className="link header-link">GAME</a>
       <form className="header-form">
         <input type="text" placeholder="Search game" value={inputValue} onChange={(e) => handleChange(e.target.value)} />
         <div className="input-img">
@@ -51,7 +48,7 @@ const Header = () => {
         </div>
       </form>
       <div ref={dropDownRef} className="dropdown">
-        <DropDownSearch />
+        <DropDownSearch onInputChange={setInputValue} />
       </div>
     </header>
   );

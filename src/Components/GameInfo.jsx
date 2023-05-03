@@ -38,15 +38,17 @@ const GameInfo = () => {
     developers: [{ name: devName }],
     rating,
     genres,
-    // gameId,
     name,
     platforms,
     released,
     website,
+    slug: oldSlug,
   } = data;
-  console.log(
-    platforms,
-  );
+
+  if (slug !== oldSlug) {
+    return <Loader />;
+  }
+
   return (
     <div className="game-info">
       <h1>{name}</h1>

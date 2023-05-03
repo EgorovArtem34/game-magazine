@@ -15,15 +15,18 @@ const GameLists = () => {
   const dispatch = useDispatch();
   const games = useSelector(selectors.selectAll);
   const { hasMore, isLoading } = useSelector((state) => state.gamesSlice);
+
   useEffect(() => {
     if (games.length === 0 && hasMore) {
       dispatch(fetchGames());
     }
   }, [dispatch, games, hasMore]);
+  if (isLoading) {
+    return <Loader />;
+  }
   if (games.length === 0 && !isLoading) {
     return <EmptyGameList />;
   }
-  console.log('GameLIST', games);
   return (
     <InfiniteScroll
       dataLength={games.length}
@@ -37,6 +40,7 @@ const GameLists = () => {
             background_image: backgroundImage,
             id, name, rating, released, slug,
           } = game;
+
           return (
             <Link to={`/game/${slug}`} key={id} className="card">
               <div
