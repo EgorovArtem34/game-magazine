@@ -1,12 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Loader from './Loader';
+import { actions } from '../slices/gamesSlice';
 
-// const makeSearchList = (games) => (
-
-// )
 const DropDownSearch = () => {
+  const { removeSearchedGames } = actions;
+  const dispatch = useDispatch();
   const {
-    isLoading,
+    // isLoading,
     searchGames: { isLoadingSearch, games },
   } = useSelector(({ gamesSlice }) => gamesSlice);
   if (!games) {
@@ -27,28 +28,30 @@ const DropDownSearch = () => {
       </div>
     );
   }
-  console.log('DropDownSearch', isLoading, isLoadingSearch, games);
-  // eslint-disable-next-line consistent-return
   return (
     <div className="dropdown-content">
       <span>Games</span>
-      <ul>
-        {games.map((game) => {
-          const {
-            background_image: backgroundImage,
-            id, name,
-          } = game;
-          return (
-            <li key={id} className="dropdown-li">
-              <div
-                className="bg-img xxx"
-                style={{ backgroundImage: `url(${backgroundImage})` }}
-              />
-              <span>{name}</span>
-            </li>
-          );
-        })}
-      </ul>
+      <nav>
+        <ul>
+          {games.map((game) => {
+            const {
+              background_image: backgroundImage,
+              id, name, slug,
+            } = game;
+            return (
+              <Link to={`/game/${slug}`} key={id} onClick={() => dispatch(removeSearchedGames())}>
+                <li key={id} className="dropdown-li">
+                  <div
+                    className="bg-img dropdown-img"
+                    style={{ backgroundImage: `url(${backgroundImage})` }}
+                  />
+                  <span>{name}</span>
+                </li>
+              </Link>
+            );
+          })}
+        </ul>
+      </nav>
     </div>
   );
 };
