@@ -54,6 +54,7 @@ export const fetchGameDetail = createAsyncThunk(
         id: gameId, name, platforms, released, website,
         background_image: image1,
         background_image_additional: image2,
+        slug,
       },
     } = await axios.get(route);
     return {
@@ -68,6 +69,7 @@ export const fetchGameDetail = createAsyncThunk(
       website,
       image1,
       image2,
+      slug,
     };
   },
 );
