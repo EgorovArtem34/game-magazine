@@ -9,6 +9,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+const noInfo = 'No information';
+
 const GameInfo = () => {
   const [images, setImages] = useState([]);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -17,6 +19,7 @@ const GameInfo = () => {
 
   useEffect(() => {
     dispatch(fetchGameDetail(slug));
+    setThumbsSwiper(null);
   }, [dispatch, slug]);
 
   const { gameDetails: { data } } = useSelector((state) => state.gamesSlice);
@@ -61,13 +64,18 @@ const GameInfo = () => {
         modules={[Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {images.map((img) => (
-          <SwiperSlide key={img.id}>
-            <div>
-              <img src={img.image} alt="" />
-            </div>
-          </SwiperSlide>
-        ))}
+        {images.map(({ image, id }) => {
+          if (image === null) {
+            return null;
+          }
+          return (
+            <SwiperSlide key={id}>
+              <div>
+                <img src={image} alt="" />
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -78,13 +86,18 @@ const GameInfo = () => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {images.map((img) => (
-          <SwiperSlide key={img.id}>
-            <div>
-              <img src={img.image} alt="" />
-            </div>
-          </SwiperSlide>
-        ))}
+        {images.map(({ image, id }) => {
+          if (image === null) {
+            return null;
+          }
+          return (
+            <SwiperSlide key={id}>
+              <div>
+                <img src={image} alt="" />
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <div>
         <ul>
@@ -93,47 +106,47 @@ const GameInfo = () => {
               Developer:
             </span>
             {' '}
-            {devName}
+            {devName || noInfo}
           </li>
           <li>
             <span className="game-stat">
               Release date:
             </span>
             {' '}
-            {released}
+            {released || noInfo}
           </li>
           <li>
             <span className="game-stat">
               Rating:
             </span>
             {' '}
-            {rating}
+            {rating || noInfo}
           </li>
           <li>
             <span className="game-stat">
               Platforms:
             </span>
             {' '}
-            {platforms.map(({ platform }) => platform.name).join(', ')}
+            {platforms.map(({ platform }) => platform.name).join(', ') || noInfo}
           </li>
           <li>
             <span className="game-stat">
               Website:
             </span>
             {' '}
-            <a href={website}>{website}</a>
+            {website.length > 0 ? <a href={website}>{website}</a> : noInfo}
           </li>
           <li>
             <span className="game-stat">
               Genres:
             </span>
             {' '}
-            {genres.map((genre) => genre.name).join(', ')}
+            {genres.map((genre) => genre.name).join(', ') || noInfo}
           </li>
         </ul>
       </div>
       <h2 className="game-desc">About</h2>
-      <span>{desc}</span>
+      <span>{desc || noInfo}</span>
     </div>
   );
 };
