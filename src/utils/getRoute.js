@@ -23,7 +23,6 @@ export default (type, sizePage, page, id = null) => {
     case 'xboxOne':
       return routes.xboxOne(sizePage, page);
     case 'searchGame':
-      // поправить параметр sizePage
       return routes.searchGame(sizePage, page);
     case 'gameDetail':
       return routes.getGameDetail(id);
