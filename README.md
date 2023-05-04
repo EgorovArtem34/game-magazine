@@ -3,7 +3,7 @@
 Тестовое задание журнал игр. 
 
 Можете просматривать список игр, выполняя сортировку по рейтингу и дате релиза, возможность просматривать дополнительную информацию по игре, кликнув на игре в списке игр. Выполнять поиск игр по названию.
-[Todo deploy](https://egorovartem34.github.io/game-magazine/)
+[Game magazine deploy](https://egorovartem34.github.io/game-magazine/)
 
 
 ## Использованные технологии
@@ -19,5 +19,10 @@
 5. Run local version `make start`
 
 ## Скриншоты
+
+![](https://raw.githubusercontent.com/EgorovArtem34/screenshots/master/gameMagazine/1.JPG)
+![](https://raw.githubusercontent.com/EgorovArtem34/screenshots/master/gameMagazine/2.JPG)
+![](https://raw.githubusercontent.com/EgorovArtem34/screenshots/master/gameMagazine/3.JPG)
+![](https://raw.githubusercontent.com/EgorovArtem34/screenshots/master/gameMagazine/4.JPG)
 
 
