@@ -12,7 +12,7 @@ const monthRange = `&dates=${dateMonthAgo},${currentDateString}`;
 const weekAgoRange = `&dates=${dateWeekAgo},${currentDateString}`;
 const nextMonthRange = `&dates=${currentDateString},${dataNextMonth}`;
 const routes = {
-  defaultPath: () => '/',
+  defaultPath: () => '/game-magazine/',
   sorted: () => '/sorted/:type',
   game: () => '/game/:slug',
   allGame: (sizePage, page) => [api, `games?key=${apiKey}&page=${page}&page_size=${sizePage}`].join('/'),
